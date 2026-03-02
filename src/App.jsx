@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Shield, Award, Users, Clock, Star, Phone, Mail, MapPin, Instagram } from 'lucide-react';
+import { Menu, X, Shield, Award, Users, Clock, Star, Phone, MapPin, Mail, Instagram, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -10,7 +10,6 @@ import { Marquee } from '@/components/magicui/marquee';
 import { NumberTicker } from '@/components/magicui/number-ticker';
 import { BorderBeam } from '@/components/magicui/border-beam';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
-import { ShineBorder } from '@/components/magicui/shine-border';
 import { AnimatedShinyText } from '@/components/magicui/animated-shiny-text';
 import { DotPattern } from '@/components/magicui/dot-pattern';
 import { BentoCard, BentoGrid } from '@/components/magicui/bento-grid';
@@ -19,7 +18,7 @@ import LightRays from './LightRays';
 import DemoBanner from './DemoBanner';
 import { cn } from '@/lib/utils';
 
-export default function App() {
+const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -27,7 +26,7 @@ export default function App() {
   const navLinks = [
     { id: 'hero', label: 'Home' },
     { id: 'about', label: 'About' },
-    { id: 'services', label: 'Collections' },
+    { id: 'services', label: 'Collection' },
     { id: 'why-us', label: 'Why Us' },
     { id: 'reviews', label: 'Reviews' },
     { id: 'faq', label: 'FAQ' },
@@ -35,147 +34,83 @@ export default function App() {
   ];
 
   const stats = [
-    { value: 350, suffix: '+', label: 'Watches Sold' },
-    { value: 2016, suffix: '', label: 'Founded' },
-    { value: 5, suffix: '+', label: 'Years Warranty' },
-    { value: 100, suffix: '%', label: 'Authenticity' }
-  ];
-
-  const aboutItems = [
-    {
-      icon: Shield,
-      title: "100% Original Watches",
-      description: "Authenticity guaranteed with certificate"
-    },
-    {
-      icon: Clock,
-      title: "5-Year Warranty",
-      description: "Comprehensive protection for your investment"
-    },
-    {
-      icon: Award,
-      title: "Full Set Documentation",
-      description: "Complete box, papers, and accessories included"
-    },
-    {
-      icon: Users,
-      title: "10/10 Condition",
-      description: "Premium quality restored to factory standards"
-    }
-  ];
-
-  const services = [
-    {
-      name: "Rolex Datejust 41 - Blue",
-      description: "Authenticity guaranteed with certificate",
-      price: "14,000 EUR",
-      image: "/assets/cars/car_audi.jpg"
-    },
-    {
-      name: "Rolex Submariner",
-      description: "Full documentation included with 5-year warranty",
-      price: "55,000 RON",
-      image: "/assets/cars/car_bmw.jpg"
-    }
+    { value: 10, suffix: '+', label: 'Years Experience' },
+    { value: 350, suffix: '+', label: 'Clients' },
+    { value: 100, suffix: '%', label: 'Originality' },
+    { value: 5, suffix: 'Y', label: 'Warranty' }
   ];
 
   const whyUsFeatures = [
-    {
-      Icon: Shield,
-      name: "Authenticity Certified",
-      description: "All watches come with official Rolex certificates and authenticity guarantees",
-      className: "col-span-3 lg:col-span-1",
-      background: <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-blue-500/5 to-transparent" />
-    },
-    {
-      Icon: Award,
-      name: "5-Year Warranty",
-      description: "We stand behind every timepiece with comprehensive coverage for your investment",
-      className: "col-span-3 lg:col-span-2",
-      background: <DotPattern opacity={0.15} className="absolute inset-0 [mask-image:linear-gradient(to_top,transparent_30%,#000_100%)]" />
-    },
-    {
-      Icon: Users,
-      name: "Expert Team",
-      description: "Our specialists are certified in luxury watch restoration and authentication",
-      className: "col-span-3 lg:col-span-2",
-      background: <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-blue-500/5 to-transparent" />
-    },
-    {
-      Icon: Clock,
-      name: "Quality Assurance",
-      description: "Every piece undergoes rigorous inspection to ensure 10/10 condition before sale",
-      className: "col-span-3 lg:col-span-1",
-      background: <DotPattern opacity={0.15} className="absolute inset-0 [mask-image:linear-gradient(to_top,transparent_30%,#000_100%)]" />
-    }
+    { Icon: Shield, name: "Authenticity Guaranteed", description: "All our Rolex watches are 100% authentic with full documentation", className: "col-span-3 lg:col-span-1", background: <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-blue-500/5 to-transparent" /> },
+    { Icon: Award, name: "5-Year Warranty", description: "Extended warranty coverage for peace of mind", className: "col-span-3 lg:col-span-2", background: <DotPattern opacity={0.15} className="absolute inset-0 [mask-image:linear-gradient(to_top,transparent_30%,#000_100%)]" /> },
+    { Icon: Users, name: "Expert Staff", description: "Our team has decades of experience in luxury timepieces", className: "col-span-3 lg:col-span-2", background: <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-blue-500/10 to-transparent" /> },
+    { Icon: Clock, name: "Full Condition", description: "Each watch is in perfect condition with 10/10 rating", className: "col-span-3 lg:col-span-1", background: <DotPattern opacity={0.15} className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent_30%,#000_100%)]" /> }
   ];
 
   const reviews = [
     {
       name: "Maria Ionescu",
       gender: "F",
-      text: "Bought a Rolex Datejust 41 - Blue with full documentation. The warranty process was smooth and transparent.",
+      text: "Bought a Rolex Submariner and was amazed by the full documentation included. The 5-year warranty gives me complete confidence.",
       rating: 5
     },
     {
       name: "Andrei Popescu",
       gender: "M",
-      text: "The Submariner I purchased has perfect condition. The team at DPWatches provided excellent service throughout.",
+      text: "Excellent service from start to finish. The Datejust 41 Blue was exactly as described with perfect condition.",
       rating: 5
     },
     {
-      name: "Elena Marinescu",
+      name: "Elena Vasilescu",
       gender: "F",
-      text: "Trusted DPWatches for my first Rolex purchase. Full set acte and 5-year guarantee gave me complete peace of mind.",
+      text: "Professional staff and genuine Rolex watches. The attention to detail and full set acte cutie made this purchase perfect.",
       rating: 5
     }
   ];
 
   const faqItems = [
     {
-      question: "How do you ensure watch authenticity?",
-      answer: "All our Rolex watches come with official certificates from Rolex and undergo rigorous authentication checks before sale."
+      question: "How do you ensure authenticity?",
+      answer: "All Rolex watches are verified through official channels and come with full documentation including box and papers."
     },
     {
-      question: "What is included in the full set documentation?",
-      answer: "Each watch includes original box, papers, warranty card, and all accessories from the manufacturer."
+      question: "What is your warranty policy?",
+      answer: "We offer a 5-year warranty on all watches with full coverage for any manufacturing defects."
     },
     {
-      question: "Do you offer warranty coverage for purchased watches?",
-      answer: "Yes, we provide a comprehensive 5-year warranty on all our Rolex collections with full documentation."
+      question: "Can I see the watch before purchasing?",
+      answer: "Yes, we encourage in-person visits to inspect the watches and discuss details with our experts."
     },
     {
-      question: "Can I return or exchange my Rolex purchase?",
-      answer: "Returns are possible within 14 days if the watch is in original condition with all accessories included."
+      question: "Do you offer financing options?",
+      answer: "We provide flexible payment plans for eligible customers with proper documentation."
     },
     {
-      question: "How long does delivery take for Rolex watches?",
-      answer: "Standard delivery takes 3-5 business days, with express options available upon request."
+      question: "What makes your condition ratings different?",
+      answer: "Our watches are carefully inspected and rated 10/10 based on originality, functionality, and cosmetic quality."
     },
     {
-      question: "Do you provide maintenance or servicing for purchased watches?",
-      answer: "Yes, we offer professional servicing and maintenance for all Rolex watches under warranty."
+      question: "How long does delivery take?",
+      answer: "Standard delivery takes 3-5 business days within Romania with tracking information provided."
     }
   ];
 
-  const handleResize = () => {
-    setIsMobile(window.innerWidth < 640);
-  };
-
   useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 640);
     handleResize();
     window.addEventListener('resize', handleResize);
-    
+
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((e) => { 
         if (e.isIntersecting) { 
-          e.target.classList.add('visible'); 
+          e.target.classList.add('visible');
+          setActiveSection(e.target.id);
           observer.unobserve(e.target); 
-        } 
+        }
       }),
       { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
-    
+
     document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
     
     return () => {
@@ -184,24 +119,23 @@ export default function App() {
     };
   }, []);
 
-  const renderStars = (rating) => {
-    return (
-      <div className="flex">
-        {[...Array(5)].map((_, i) => (
-          <Star 
-            key={i} 
-            className={`w-4 h-4 ${i < rating ? 'fill-blue-400 text-blue-400' : 'text-zinc-600'}`} 
-          />
-        ))}
-      </div>
-    );
-  };
+  const services = [
+    { name: "Rolex Datejust 41 - Blue", price: "14000 EUR" },
+    { name: "Rolex Submariner", price: "55000 RON" }
+  ];
+
+  const valueProps = [
+    { icon: Shield, title: "Authentic Watches", description: "100% Original Rolex" },
+    { icon: Award, title: "5-Year Warranty", description: "Full Coverage" },
+    { icon: Clock, title: "Condition 10/10", description: "Mint State" },
+    { icon: Users, title: "Full Set Included", description: "Box & Papers" }
+  ];
 
   return (
     <>
       <DemoBanner />
       
-      {/* Navbar */}
+      {/* Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto mt-4">
           <div className="flex items-center justify-between h-14 px-4 sm:px-6 rounded-full bg-black/60 backdrop-blur-xl border border-white/[0.08]">
@@ -242,10 +176,7 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section 
-        id="hero" 
-        className="pt-40 pb-24 sm:pt-48 sm:pb-32 min-h-screen flex items-center relative overflow-x-clip"
-      >
+      <section id="hero" className="pt-40 pb-24 sm:pt-48 sm:pb-32 min-h-screen flex items-center relative overflow-x-clip">
         <div className="absolute inset-0 z-0">
           <LightRays 
             raysOrigin="top-center" 
@@ -265,81 +196,70 @@ export default function App() {
         
         <DotPattern opacity={0.15} className="absolute inset-0 z-0" />
         
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 relative z-10">
-          <div className="text-center">
-            <div className="hero-blur hero-delay-1 inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 backdrop-blur-sm mb-6">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 text-center">
+          <div className="hero-blur hero-delay-1 mb-6">
+            <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 backdrop-blur-sm">
               <AnimatedShinyText className="text-sm font-medium">Premium Rolex Dealer</AnimatedShinyText>
             </div>
-            
-            <h1 className="hero-blur hero-delay-2 max-w-4xl mx-auto text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent mb-6">
-              Your Trusted Rolex Dealer
-            </h1>
-            
-            <p className="hero-blur hero-delay-3 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-              Premium authentic Rolex watches with 5-year guarantee, full documentation, and 10/10 condition. Since 2016.
-            </p>
-            
-            <div className="hero-blur hero-delay-4 flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <ShimmerButton className="shadow-2xl btn-hover" background="rgba(59,130,246,1)">
-                <span className="text-sm font-medium text-white">Book Appointment</span>
-              </ShimmerButton>
-              
-              <Button 
-                variant="outline" 
-                className="h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover"
-              >
-                <Phone className="w-4 h-4 mr-2" />
-                Call Now
-              </Button>
-            </div>
-            
-            <div className="hero-blur hero-delay-5 grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-12">
-              {stats.map((stat, i) => (
-                <div key={i} className={cn("text-center", i > 0 && "sm:border-l sm:border-white/10 sm:pl-12")}>
-                  <NumberTicker 
-                    value={stat.value} 
-                    suffix={stat.suffix} 
-                    className="text-4xl font-black bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(59,130,246,0.6)]" 
-                  />
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{stat.label}</p>
-                </div>
-              ))}
-            </div>
+          </div>
+          
+          <h1 className="hero-blur hero-delay-2 text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent">
+            Premium Rolex Dealer
+          </h1>
+          
+          <p className="hero-blur hero-delay-3 text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
+            Your trusted source for authentic luxury timepieces with 5-year warranty and full documentation. Experience the finest craftsmanship with guaranteed condition.
+          </p>
+          
+          <div className="hero-blur hero-delay-4 flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+            <ShimmerButton className="shadow-2xl btn-hover" background="rgba(59, 130, 246, 1)">
+              <span className="text-sm font-medium text-white">Book Appointment</span>
+            </ShimmerButton>
+            <Button variant="outline" className="h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover">
+              <Phone className="w-4 h-4 mr-2" />
+              Call Now
+            </Button>
+          </div>
+          
+          <div className="hero-blur hero-delay-5 grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-12">
+            {stats.map((stat, i) => (
+              <div key={i} className={cn("text-center", i > 0 && "sm:border-l sm:border-white/10 sm:pl-12")}>
+                <NumberTicker 
+                  value={stat.value} 
+                  suffix={stat.suffix} 
+                  className="text-4xl font-black bg-gradient-to-r from-white to-blue-400 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(59,130,246,0.6)]" 
+                />
+                <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
+      <section id="about" className="relative overflow-x-clip py-24 sm:py-32 lg:py-40">
         <div className="absolute top-0 left-0 w-72 h-72 bg-blue-500/[0.07] rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-blue-500/[0.05] rounded-full blur-[140px] pointer-events-none" />
         
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="text-center mb-16 sm:mb-20">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-              Why Choose DPWatches?
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Your trusted source for authentic Rolex watches since 2016. We guarantee 100% original pieces with full documentation.
-            </p>
+          <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 animate-on-scroll">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">Why Choose DPWatches?</h2>
+            <p className="text-lg text-muted-foreground">Founded in 2016, we specialize in authentic Rolex watches with full documentation and guaranteed condition.</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-            {aboutItems.map((item, index) => (
-              <Card 
-                key={index} 
-                className="group relative bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden hover:border-blue-500/20 transition-all duration-500 card-hover"
-              >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16 animate-on-scroll">
+            {valueProps.map((prop, index) => (
+              <Card key={index} className="group relative bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden hover:border-blue-500/20 transition-all duration-500 card-hover">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <BorderBeam size={120} duration={20} delay={index * 1.5} colorFrom="#3b82f6" colorTo="#3b82f6" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <BorderBeam size={80} duration={20} delay={index * 1.5} colorFrom="#3b82f6" colorTo="#3b82f6" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative p-8">
                   <div className="flex items-start gap-5">
                     <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-500">
-                      <item.icon className="w-6 h-6 text-blue-400" />
+                      <prop.icon className="w-6 h-6 text-blue-400" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold mb-2 group-hover:text-blue-50 transition-colors">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
+                      <h3 className="text-lg font-bold mb-2 group-hover:text-blue-50 transition-colors">{prop.title}</h3>
+                      <p className="text-sm text-muted-foreground">{prop.description}</p>
                     </div>
                   </div>
                 </div>
@@ -350,44 +270,30 @@ export default function App() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
+      <section id="services" className="relative overflow-x-clip py-24 sm:py-32 lg:py-40">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-500/[0.06] rounded-full blur-[130px] pointer-events-none" />
         
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="text-center mb-16 sm:mb-20">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-              Premium Rolex Collections
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Discover our curated selection of authentic Rolex timepieces with full warranty and documentation.
-            </p>
+          <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 animate-on-scroll">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">Luxury Timepieces</h2>
+            <p className="text-lg text-muted-foreground">Discover our premium Rolex collection with exceptional quality and service.</p>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
-              <Card 
-                key={index} 
-                className="group relative bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden hover:border-blue-500/20 transition-all duration-500 card-hover"
-              >
+              <Card key={index} className="group relative bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden hover:border-blue-500/20 transition-all duration-500 card-hover">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <BorderBeam size={80} duration={20} colorFrom="#3b82f6" colorTo="#3b82f6" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <BorderBeam size={80} duration={20} delay={index * 1.5} colorFrom="#3b82f6" colorTo="#3b82f6" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative p-8">
-                  <img 
-                    src={service.image} 
-                    alt={service.name} 
-                    className="w-full h-48 object-cover rounded-xl mb-6 img-hover"
-                  />
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-blue-50 transition-colors">{service.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-4">{service.description}</p>
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-blue-50 transition-colors">{service.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">Premium quality with full documentation and warranty coverage</p>
                   <Separator className="mb-5 bg-white/[0.06]" />
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-black bg-gradient-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent">
-                      {service.price}
-                    </span>
-                    <ShimmerButton className="shadow-2xl btn-hover" background="rgba(59,130,246,1)">
-                      <span className="text-sm font-medium text-white">Book Now</span>
-                    </ShimmerButton>
+                  <div className="text-2xl font-black bg-gradient-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent mb-6">
+                    {service.price}
                   </div>
+                  <ShimmerButton className="w-full shadow-2xl btn-hover" background="rgba(59, 130, 246, 1)">
+                    <span className="text-sm font-medium text-white">Book Now</span>
+                  </ShimmerButton>
                 </div>
               </Card>
             ))}
@@ -396,17 +302,13 @@ export default function App() {
       </section>
 
       {/* Why Us Section */}
-      <section id="why-us" className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
+      <section id="why-us" className="relative overflow-x-clip py-24 sm:py-32 lg:py-40">
         <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-blue-500/[0.05] rounded-full blur-[120px] pointer-events-none" />
         
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="text-center mb-16 sm:mb-20">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-              Why Trust DPWatches?
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Your peace of mind is our priority. Here's what sets us apart from other dealers.
-            </p>
+          <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 animate-on-scroll">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">Why We're Different</h2>
+            <p className="text-lg text-muted-foreground">Our unique advantages set us apart in the luxury watch market.</p>
           </div>
           
           <BentoGrid className="lg:grid-rows-2">
@@ -432,40 +334,37 @@ export default function App() {
       </section>
 
       {/* Reviews Section */}
-      <section id="reviews" className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
+      <section id="reviews" className="relative overflow-x-clip py-24 sm:py-32 lg:py-40">
         <div className="absolute top-0 right-1/4 w-64 h-64 bg-blue-500/[0.06] rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/[0.04] rounded-full blur-[140px] pointer-events-none" />
         
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="text-center mb-16 sm:mb-20">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-              What Our Clients Say
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Real experiences from satisfied customers who trust DPWatches for their Rolex collections.
-            </p>
+          <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 animate-on-scroll">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">What Our Clients Say</h2>
+            <p className="text-lg text-muted-foreground">Real experiences from satisfied customers who trust us with their luxury watches.</p>
           </div>
           
           <div className="relative flex max-w-6xl mx-auto flex-col items-center justify-center overflow-hidden">
             <Marquee pauseOnHover className="[--duration:30s]">
               {reviews.map((review, index) => (
-                <Card 
-                  key={index} 
-                  className="group relative bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden hover:border-blue-500/20 transition-all duration-500 card-hover max-w-sm mx-4"
-                >
+                <Card key={index} className="group relative bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden hover:border-blue-500/20 transition-all duration-500 card-hover mx-4 max-w-sm">
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <BorderBeam size={80} duration={20} colorFrom="#3b82f6" colorTo="#3b82f6" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <BorderBeam size={80} duration={20} delay={index * 1.5} colorFrom="#3b82f6" colorTo="#3b82f6" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="relative p-6">
                     <div className="flex items-center mb-4">
-                      {renderStars(review.rating)}
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-blue-400 fill-current" />
+                      ))}
                     </div>
                     <p className="text-sm text-muted-foreground mb-4">{review.text}</p>
                     <div className="flex items-center">
                       <Avatar className="w-8 h-8 mr-3">
-                        <AvatarImage src={`/assets/people/${review.gender === 'M' ? 'boy_1' : 'girl_1'}.jpg`} alt={review.name} />
+                        <AvatarImage src={`/assets/people/${review.gender === 'M' ? 'boy_1.jpg' : 'girl_1.jpg'}`} alt={review.name} />
                         <AvatarFallback>{review.name.charAt(0)}</AvatarFallback>
                       </Avatar>
-                      <span className="text-sm font-medium">{review.name}</span>
+                      <div>
+                        <p className="text-sm font-medium">{review.name}</p>
+                      </div>
                     </div>
                   </div>
                 </Card>
@@ -478,156 +377,125 @@ export default function App() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
+      <section id="faq" className="relative overflow-x-clip py-24 sm:py-32 lg:py-40">
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="text-center mb-16 sm:mb-20">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Find answers to common questions about our authentic Rolex watches and services.
-            </p>
+          <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 animate-on-scroll">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">Frequently Asked Questions</h2>
+            <p className="text-lg text-muted-foreground">Answers to common questions about our luxury watch dealer services.</p>
           </div>
           
-          <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
-            {faqItems.map((item, index) => (
-              <AccordionItem 
-                key={index} 
-                value={`item-${index}`} 
-                className="animate-on-scroll delay-1 border-white/[0.05] rounded-xl mb-4"
-              >
-                <AccordionTrigger className="text-left text-base hover:bg-white/[0.02] transition-colors duration-200 py-4 px-6">
-                  {item.question}
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-4 text-muted-foreground">
-                  {item.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <div className="max-w-3xl mx-auto animate-on-scroll">
+            <Accordion type="single" collapsible className="w-full">
+              {faqItems.map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border-white/[0.06] mb-4 rounded-xl">
+                  <AccordionTrigger className="text-left py-4 px-6 hover:bg-white/[0.02] transition-colors duration-200 rounded-lg">
+                    <span className="font-medium">{item.question}</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-4 text-muted-foreground">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
+      <section id="contact" className="relative overflow-x-clip py-24 sm:py-32 lg:py-40">
         <div className="absolute top-1/3 left-0 w-72 h-72 bg-blue-500/[0.07] rounded-full blur-[120px] pointer-events-none" />
         
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="text-center mb-16 sm:mb-20">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-              Ready to Find Your Perfect Rolex?
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Contact us today to schedule an appointment or request more information about our premium collections.
-            </p>
+          <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20 animate-on-scroll">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">Let's Connect</h2>
+            <p className="text-lg text-muted-foreground">Schedule a consultation or visit our location to explore our Rolex collection.</p>
           </div>
           
           <div className="grid lg:grid-cols-2 gap-12">
-            <div className="space-y-6">
-              <Card className="bg-white/[0.02] border-white/[0.05] backdrop-blur-sm">
-                <div className="p-6">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center">
-                      <Phone className="w-5 h-5 text-blue-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold">Phone</h3>
-                      <p className="text-muted-foreground">+40 734 049 253</p>
-                    </div>
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    className="w-full h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover"
-                  >
-                    <Phone className="w-4 h-4 mr-2" />
-                    Call Now
-                  </Button>
-                </div>
-              </Card>
-              
-              <Card className="bg-white/[0.02] border-white/[0.05] backdrop-blur-sm">
-                <div className="p-6">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center">
-                      <Mail className="w-5 h-5 text-blue-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold">Email</h3>
-                      <p className="text-muted-foreground">office@dpwatches.ro</p>
-                    </div>
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    className="w-full h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover"
-                  >
-                    <Mail className="w-4 h-4 mr-2" />
-                    Send Message
-                  </Button>
-                </div>
-              </Card>
-              
-              <Card className="bg-white/[0.02] border-white/[0.05] backdrop-blur-sm">
-                <div className="p-6">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center">
+            <div className="animate-on-scroll">
+              <Card className="bg-white/[0.02] border-white/[0.05] backdrop-blur-sm rounded-2xl">
+                <CardHeader>
+                  <CardTitle className="text-xl font-bold">Contact Information</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center">
                       <MapPin className="w-5 h-5 text-blue-400" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold">Address</h3>
+                      <h3 className="font-medium">Address</h3>
                       <p className="text-muted-foreground">Veris Pipera Park</p>
                     </div>
                   </div>
-                  <Button 
-                    variant="outline" 
-                    className="w-full h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover"
-                  >
-                    <MapPin className="w-4 h-4 mr-2" />
-                    Get Directions
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center">
+                      <Phone className="w-5 h-5 text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="font-medium">Phone</h3>
+                      <p className="text-muted-foreground">+40 734 049 253</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center">
+                      <Mail className="w-5 h-5 text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="font-medium">Email</h3>
+                      <p className="text-muted-foreground">office@dpwatches.ro</p>
+                    </div>
+                  </div>
+                </CardContent>
+                <CardFooter className="flex gap-4 pt-4">
+                  <Button variant="outline" className="h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover">
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call
                   </Button>
-                </div>
+                  <Button variant="outline" className="h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover">
+                    <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.52a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13a8.27 8.27 0 005.58 2.17V11.7a4.83 4.83 0 01-3.77-1.24V6.69h3.77z"/>
+                    </svg>
+                    WhatsApp
+                  </Button>
+                </CardFooter>
               </Card>
-              
-              <Button 
-                variant="outline" 
-                className="w-full h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover"
-              >
-                <Phone className="w-4 h-4 mr-2" />
-                WhatsApp
-              </Button>
             </div>
             
-            <div className="h-[350px] sm:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden">
-              <iframe 
-                src={"https://www.google.com/maps?q=" + encodeURIComponent("Veris Pipera Park") + "&output=embed"} 
-                width="100%" 
-                height="100%" 
-                style={{border:0}} 
-                allowFullScreen 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                title="DPWatches Location"
-              ></iframe>
+            <div className="animate-on-scroll">
+              <div className="h-[350px] sm:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden">
+                <iframe 
+                  src={"https://www.google.com/maps?q=" + encodeURIComponent("Veris Pipera Park") + "&output=embed"} 
+                  width="100%" 
+                  height="100%" 
+                  style={{border:0}} 
+                  allowFullScreen 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="relative pt-8 pb-32">
-        <Separator className="mb-8" />
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 flex flex-col md:flex-row items-center justify-between">
-          <p className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © {new Date().getFullYear()} DPWatches. All rights reserved.
-          </p>
-          <div className="flex gap-3">
-            <a 
-              href="https://www.instagram.com/dpwatches.ro" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-white/[0.05] flex items-center justify-center hover:bg-white/[0.1] transition-colors"
-            >
-              <Instagram className="w-5 h-5 text-white" />
-            </a>
+      <footer className="relative border-t border-white/[0.05] py-8 pb-32">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
+          <Separator className="mb-8" />
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} DPWatches. All rights reserved.</p>
+            <div className="flex gap-3 mt-4 md:mt-0">
+              <a href="https://www.instagram.com/dpwatches.ro" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/[0.05] flex items-center justify-center hover:bg-white/[0.1] transition-colors">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="https://www.tiktok.com/@dragospetcuwatches" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/[0.05] flex items-center justify-center hover:bg-white/[0.1] transition-colors">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.52a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13a8.27 8.27 0 005.58 2.17V11.7a4.83 4.83 0 01-3.77-1.24V6.69h3.77z"/>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </footer>
@@ -640,4 +508,6 @@ export default function App() {
       </div>
     </>
   );
-}
+};
+
+export default App;
