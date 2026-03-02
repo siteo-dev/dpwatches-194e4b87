@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Shield, Award, Users, Clock, Phone, MapPin, Mail, Instagram, MessageCircle } from 'lucide-react';
+import { Menu, X, Shield, Award, Users, Clock, Star, Phone, Mail, MapPin, Instagram } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -15,11 +15,11 @@ import { AnimatedShinyText } from '@/components/magicui/animated-shiny-text';
 import { DotPattern } from '@/components/magicui/dot-pattern';
 import { BentoCard, BentoGrid } from '@/components/magicui/bento-grid';
 import { ProgressiveBlur } from '@/components/magicui/progressive-blur';
-import { cn } from '@/lib/utils';
-import DemoBanner from './DemoBanner';
 import LightRays from './LightRays';
+import DemoBanner from './DemoBanner';
+import { cn } from '@/lib/utils';
 
-const App = () => {
+export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -27,7 +27,7 @@ const App = () => {
   const navLinks = [
     { id: 'hero', label: 'Home' },
     { id: 'about', label: 'About' },
-    { id: 'services', label: 'Collection' },
+    { id: 'services', label: 'Collections' },
     { id: 'why-us', label: 'Why Us' },
     { id: 'reviews', label: 'Reviews' },
     { id: 'faq', label: 'FAQ' },
@@ -35,46 +35,46 @@ const App = () => {
   ];
 
   const stats = [
-    { value: 100, suffix: '+', label: 'Authentic Models' },
-    { value: 5, suffix: ' years', label: 'Warranty' },
-    { value: 10, suffix: '/10', label: 'Condition' },
-    { value: 200, suffix: '+', label: 'Happy Clients' }
+    { value: 350, suffix: '+', label: 'Watches Sold' },
+    { value: 2016, suffix: '', label: 'Founded' },
+    { value: 5, suffix: '+', label: 'Years Warranty' },
+    { value: 100, suffix: '%', label: 'Authenticity' }
   ];
 
-  const aboutFeatures = [
+  const aboutItems = [
     {
       icon: Shield,
-      title: "Authentic Rolex Watches",
-      description: "100% Original watches with genuine certificates"
+      title: "100% Original Watches",
+      description: "Authenticity guaranteed with certificate"
     },
     {
       icon: Clock,
       title: "5-Year Warranty",
-      description: "Full coverage for your investment"
+      description: "Comprehensive protection for your investment"
     },
     {
       icon: Award,
-      title: "Perfect Condition",
-      description: "Each watch meticulously checked and maintained"
+      title: "Full Set Documentation",
+      description: "Complete box, papers, and accessories included"
     },
     {
       icon: Users,
-      title: "Full Documentation",
-      description: "Box included with all original acte cutie"
+      title: "10/10 Condition",
+      description: "Premium quality restored to factory standards"
     }
   ];
 
   const services = [
     {
       name: "Rolex Datejust 41 - Blue",
-      description: "Full set, 5-year warranty",
-      price: "14000 EUR",
+      description: "Authenticity guaranteed with certificate",
+      price: "14,000 EUR",
       image: "/assets/cars/car_audi.jpg"
     },
     {
       name: "Rolex Submariner",
-      description: "Authentic, condition 10/10",
-      price: "55000 RON",
+      description: "Full documentation included with 5-year warranty",
+      price: "55,000 RON",
       image: "/assets/cars/car_bmw.jpg"
     }
   ];
@@ -82,79 +82,90 @@ const App = () => {
   const whyUsFeatures = [
     {
       Icon: Shield,
-      name: "Authenticity Guaranteed",
-      description: "All watches come with original certificates and full documentation"
+      name: "Authenticity Certified",
+      description: "All watches come with official Rolex certificates and authenticity guarantees",
+      className: "col-span-3 lg:col-span-1",
+      background: <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-blue-500/5 to-transparent" />
     },
     {
       Icon: Award,
       name: "5-Year Warranty",
-      description: "Full coverage for your investment"
+      description: "We stand behind every timepiece with comprehensive coverage for your investment",
+      className: "col-span-3 lg:col-span-2",
+      background: <DotPattern opacity={0.15} className="absolute inset-0 [mask-image:linear-gradient(to_top,transparent_30%,#000_100%)]" />
     },
     {
       Icon: Users,
-      name: "Verified Clients",
-      description: "Over 200 satisfied customers worldwide"
+      name: "Expert Team",
+      description: "Our specialists are certified in luxury watch restoration and authentication",
+      className: "col-span-3 lg:col-span-2",
+      background: <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-blue-500/5 to-transparent" />
     },
     {
       Icon: Clock,
-      name: "Perfect Condition",
-      description: "Each watch is meticulously checked and maintained"
+      name: "Quality Assurance",
+      description: "Every piece undergoes rigorous inspection to ensure 10/10 condition before sale",
+      className: "col-span-3 lg:col-span-1",
+      background: <DotPattern opacity={0.15} className="absolute inset-0 [mask-image:linear-gradient(to_top,transparent_30%,#000_100%)]" />
     }
   ];
 
   const reviews = [
     {
-      name: "Maria I.",
-      text: "The Rolex Datejust I bought was exactly as described. The full documentation and 5-year warranty gave me peace of mind.",
-      avatar: "/assets/people/girl_1.jpg",
+      name: "Maria Ionescu",
+      gender: "F",
+      text: "Bought a Rolex Datejust 41 - Blue with full documentation. The warranty process was smooth and transparent.",
       rating: 5
     },
     {
-      name: "Andrei M.",
-      text: "I've purchased two Rolex watches from DPWatches. The condition is perfect, the service is excellent, and the guarantee is reliable.",
-      avatar: "/assets/people/boy_1.jpg",
+      name: "Andrei Popescu",
+      gender: "M",
+      text: "The Submariner I purchased has perfect condition. The team at DPWatches provided excellent service throughout.",
       rating: 5
     },
     {
-      name: "Elena S.",
-      text: "The Submariner I received was in pristine condition. Everything was included in the box, and the 5-year warranty makes me feel secure.",
-      avatar: "/assets/people/girl_1.jpg",
+      name: "Elena Marinescu",
+      gender: "F",
+      text: "Trusted DPWatches for my first Rolex purchase. Full set acte and 5-year guarantee gave me complete peace of mind.",
       rating: 5
     }
   ];
 
   const faqItems = [
     {
-      question: "How do I verify the authenticity of a Rolex watch?",
-      answer: "All our Rolex watches come with original certificates, full documentation, and are inspected for authenticity before sale."
+      question: "How do you ensure watch authenticity?",
+      answer: "All our Rolex watches come with official certificates from Rolex and undergo rigorous authentication checks before sale."
     },
     {
-      question: "What does the 5-year warranty cover?",
-      answer: "Our warranty includes repairs, servicing, and replacement parts for any manufacturing defects within five years of purchase."
+      question: "What is included in the full set documentation?",
+      answer: "Each watch includes original box, papers, warranty card, and all accessories from the manufacturer."
     },
     {
-      question: "Do you offer international shipping?",
-      answer: "Yes, we ship globally with secure packaging and insurance included in the price."
+      question: "Do you offer warranty coverage for purchased watches?",
+      answer: "Yes, we provide a comprehensive 5-year warranty on all our Rolex collections with full documentation."
     },
     {
-      question: "Can I return a Rolex watch if I'm not satisfied?",
-      answer: "We offer a 30-day satisfaction guarantee on all watches. Contact us within this period for returns or exchanges."
+      question: "Can I return or exchange my Rolex purchase?",
+      answer: "Returns are possible within 14 days if the watch is in original condition with all accessories included."
     },
     {
-      question: "What condition are the watches in?",
-      answer: "All our Rolex watches are in excellent condition, with full sets of documentation and accessories."
+      question: "How long does delivery take for Rolex watches?",
+      answer: "Standard delivery takes 3-5 business days, with express options available upon request."
     },
     {
-      question: "How do I schedule an appointment to view watches?",
-      answer: "You can book a visit through our website, call us at +40 734 049 253, or WhatsApp for more information."
+      question: "Do you provide maintenance or servicing for purchased watches?",
+      answer: "Yes, we offer professional servicing and maintenance for all Rolex watches under warranty."
     }
   ];
 
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 640);
+  };
+
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 640);
     handleResize();
     window.addEventListener('resize', handleResize);
-
+    
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((e) => { 
         if (e.isIntersecting) { 
@@ -164,7 +175,7 @@ const App = () => {
       }),
       { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
-
+    
     document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
     
     return () => {
@@ -173,23 +184,24 @@ const App = () => {
     };
   }, []);
 
-  const renderStars = (count) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <svg
-        key={i}
-        className={`w-4 h-4 ${i < count ? 'text-amber-400 fill-current' : 'text-zinc-600'}`}
-        viewBox="0 0 24 24"
-      >
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-      </svg>
-    ));
+  const renderStars = (rating) => {
+    return (
+      <div className="flex">
+        {[...Array(5)].map((_, i) => (
+          <Star 
+            key={i} 
+            className={`w-4 h-4 ${i < rating ? 'fill-blue-400 text-blue-400' : 'text-zinc-600'}`} 
+          />
+        ))}
+      </div>
+    );
   };
 
   return (
     <>
       <DemoBanner />
       
-      {/* Navigation */}
+      {/* Navbar */}
       <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto mt-4">
           <div className="flex items-center justify-between h-14 px-4 sm:px-6 rounded-full bg-black/60 backdrop-blur-xl border border-white/[0.08]">
@@ -255,16 +267,16 @@ const App = () => {
         
         <div className="max-w-6xl mx-auto px-6 sm:px-8 relative z-10">
           <div className="text-center">
-            <div className="hero-blur hero-delay-1 inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 backdrop-blur-sm mb-8">
+            <div className="hero-blur hero-delay-1 inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5 backdrop-blur-sm mb-6">
               <AnimatedShinyText className="text-sm font-medium">Premium Rolex Dealer</AnimatedShinyText>
             </div>
             
             <h1 className="hero-blur hero-delay-2 max-w-4xl mx-auto text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-transparent mb-6">
-              Your Premium Timepiece Dealer
+              Your Trusted Rolex Dealer
             </h1>
             
-            <p className="hero-blur hero-delay-3 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
-              Discover 100% authentic Rolex watches with 5-year warranty, perfect condition, and full documentation. Since 2016.
+            <p className="hero-blur hero-delay-3 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+              Premium authentic Rolex watches with 5-year guarantee, full documentation, and 10/10 condition. Since 2016.
             </p>
             
             <div className="hero-blur hero-delay-4 flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
@@ -298,36 +310,36 @@ const App = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="relative overflow-x-clip py-24 sm:py-32">
+      <section id="about" className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
         <div className="absolute top-0 left-0 w-72 h-72 bg-blue-500/[0.07] rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-blue-500/[0.05] rounded-full blur-[140px] pointer-events-none" />
         
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
           <div className="text-center mb-16 sm:mb-20">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-              Trusted Rolex Dealer Since 2016
+              Why Choose DPWatches?
             </h2>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              DPWatches is your premier destination for authentic luxury timepieces. We specialize in genuine Rolex watches with full documentation and warranty.
+              Your trusted source for authentic Rolex watches since 2016. We guarantee 100% original pieces with full documentation.
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-            {aboutFeatures.map((feature, index) => (
+            {aboutItems.map((item, index) => (
               <Card 
                 key={index} 
                 className="group relative bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden hover:border-blue-500/20 transition-all duration-500 card-hover"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <BorderBeam size={80} duration={20} delay={index * 1.5} colorFrom="#3b82f6" colorTo="#3b82f6" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <BorderBeam size={120} duration={20} delay={index * 1.5} colorFrom="#3b82f6" colorTo="#3b82f6" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative p-8">
                   <div className="flex items-start gap-5">
                     <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-500">
-                      <feature.icon className="w-6 h-6 text-blue-400" />
+                      <item.icon className="w-6 h-6 text-blue-400" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold mb-2 group-hover:text-blue-50 transition-colors">{feature.title}</h3>
-                      <p className="text-sm text-muted-foreground">{feature.description}</p>
+                      <h3 className="text-lg font-bold mb-2 group-hover:text-blue-50 transition-colors">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground">{item.description}</p>
                     </div>
                   </div>
                 </div>
@@ -338,7 +350,7 @@ const App = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="relative overflow-x-clip py-24 sm:py-32">
+      <section id="services" className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-500/[0.06] rounded-full blur-[130px] pointer-events-none" />
         
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
@@ -347,7 +359,7 @@ const App = () => {
               Premium Rolex Collections
             </h2>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Explore our curated selection of authentic Rolex timepieces with full documentation and warranty.
+              Discover our curated selection of authentic Rolex timepieces with full warranty and documentation.
             </p>
           </div>
           
@@ -358,28 +370,24 @@ const App = () => {
                 className="group relative bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden hover:border-blue-500/20 transition-all duration-500 card-hover"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <BorderBeam size={80} duration={20} delay={index * 1.5} colorFrom="#3b82f6" colorTo="#3b82f6" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <BorderBeam size={80} duration={20} colorFrom="#3b82f6" colorTo="#3b82f6" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative p-8">
-                  <div className="flex items-center justify-center mb-6">
-                    <img 
-                      src={service.image} 
-                      alt={service.name} 
-                      className="w-full h-48 object-cover rounded-xl img-hover transition-all duration-700"
-                    />
-                  </div>
-                  
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-blue-50 transition-colors">{service.name}</h3>
+                  <img 
+                    src={service.image} 
+                    alt={service.name} 
+                    className="w-full h-48 object-cover rounded-xl mb-6 img-hover"
+                  />
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-blue-50 transition-colors">{service.name}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{service.description}</p>
-                  
                   <Separator className="mb-5 bg-white/[0.06]" />
-                  
-                  <div className="text-2xl font-black bg-gradient-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent mb-6">
-                    {service.price}
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-black bg-gradient-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent">
+                      {service.price}
+                    </span>
+                    <ShimmerButton className="shadow-2xl btn-hover" background="rgba(59,130,246,1)">
+                      <span className="text-sm font-medium text-white">Book Now</span>
+                    </ShimmerButton>
                   </div>
-                  
-                  <ShimmerButton className="w-full shadow-2xl btn-hover" background="rgba(59,130,246,1)">
-                    <span className="text-sm font-medium text-white">Book Now</span>
-                  </ShimmerButton>
                 </div>
               </Card>
             ))}
@@ -387,17 +395,17 @@ const App = () => {
         </div>
       </section>
 
-      {/* Why-Us Section */}
-      <section id="why-us" className="relative overflow-x-clip py-24 sm:py-32">
+      {/* Why Us Section */}
+      <section id="why-us" className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
         <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-blue-500/[0.05] rounded-full blur-[120px] pointer-events-none" />
         
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
           <div className="text-center mb-16 sm:mb-20">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-              Why Choose DPWatches?
+              Why Trust DPWatches?
             </h2>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Your trusted Rolex dealer with unmatched quality and service.
+              Your peace of mind is our priority. Here's what sets us apart from other dealers.
             </p>
           </div>
           
@@ -405,20 +413,8 @@ const App = () => {
             {whyUsFeatures.map((feature, index) => (
               <BentoCard 
                 key={index} 
-                className={cn(
-                  "hover:border-blue-500/20",
-                  index === 0 && "col-span-3 lg:col-span-1",
-                  index === 1 && "col-span-3 lg:col-span-2",
-                  index === 2 && "col-span-3 lg:col-span-2",
-                  index === 3 && "col-span-3 lg:col-span-1"
-                )}
-                background={
-                  index === 0 ? (
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-blue-500/5 to-transparent" />
-                  ) : (
-                    <DotPattern opacity={0.04} className="absolute inset-0 [mask-image:linear-gradient(to_top,transparent_30%,#000_100%)]" />
-                  )
-                }
+                className={cn(feature.className, "hover:border-blue-500/20")} 
+                background={feature.background}
               >
                 <div className="flex items-start gap-5">
                   <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-500">
@@ -436,7 +432,7 @@ const App = () => {
       </section>
 
       {/* Reviews Section */}
-      <section id="reviews" className="relative overflow-x-clip py-24 sm:py-32">
+      <section id="reviews" className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
         <div className="absolute top-0 right-1/4 w-64 h-64 bg-blue-500/[0.06] rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/[0.04] rounded-full blur-[140px] pointer-events-none" />
         
@@ -446,7 +442,7 @@ const App = () => {
               What Our Clients Say
             </h2>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Real experiences from our satisfied customers.
+              Real experiences from satisfied customers who trust DPWatches for their Rolex collections.
             </p>
           </div>
           
@@ -455,24 +451,22 @@ const App = () => {
               {reviews.map((review, index) => (
                 <Card 
                   key={index} 
-                  className="group relative bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden hover:border-blue-500/20 transition-all duration-500 card-hover w-[300px] sm:w-[350px] max-w-sm mx-4"
+                  className="group relative bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden hover:border-blue-500/20 transition-all duration-500 card-hover max-w-sm mx-4"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <BorderBeam size={80} duration={20} delay={index * 1.5} colorFrom="#3b82f6" colorTo="#3b82f6" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <BorderBeam size={80} duration={20} colorFrom="#3b82f6" colorTo="#3b82f6" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="relative p-6">
                     <div className="flex items-center mb-4">
-                      <Avatar className="w-10 h-10 mr-3">
-                        <AvatarImage src={review.avatar} alt={review.name} />
+                      {renderStars(review.rating)}
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-4">{review.text}</p>
+                    <div className="flex items-center">
+                      <Avatar className="w-8 h-8 mr-3">
+                        <AvatarImage src={`/assets/people/${review.gender === 'M' ? 'boy_1' : 'girl_1'}.jpg`} alt={review.name} />
                         <AvatarFallback>{review.name.charAt(0)}</AvatarFallback>
                       </Avatar>
-                      <div>
-                        <h4 className="text-sm font-semibold">{review.name}</h4>
-                        <div className="flex items-center mt-1">
-                          {renderStars(review.rating)}
-                        </div>
-                      </div>
+                      <span className="text-sm font-medium">{review.name}</span>
                     </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{review.text}</p>
                   </div>
                 </Card>
               ))}
@@ -484,121 +478,135 @@ const App = () => {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-24 sm:py-32">
+      <section id="faq" className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
           <div className="text-center mb-16 sm:mb-20">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
               Frequently Asked Questions
             </h2>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Everything you need to know about our Rolex watches and services.
+              Find answers to common questions about our authentic Rolex watches and services.
             </p>
           </div>
           
-          <div className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="w-full">
-              {faqItems.map((item, index) => (
-                <AccordionItem 
-                  key={index} 
-                  value={`item-${index}`} 
-                  className="animate-on-scroll delay-1 border-b border-white/[0.06] pb-4 mb-4"
-                >
-                  <AccordionTrigger className="text-left text-lg hover:text-blue-400 transition-colors">
-                    {item.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
+          <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
+            {faqItems.map((item, index) => (
+              <AccordionItem 
+                key={index} 
+                value={`item-${index}`} 
+                className="animate-on-scroll delay-1 border-white/[0.05] rounded-xl mb-4"
+              >
+                <AccordionTrigger className="text-left text-base hover:bg-white/[0.02] transition-colors duration-200 py-4 px-6">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4 text-muted-foreground">
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="relative overflow-x-clip py-24 sm:py-32">
+      <section id="contact" className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
         <div className="absolute top-1/3 left-0 w-72 h-72 bg-blue-500/[0.07] rounded-full blur-[120px] pointer-events-none" />
         
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
           <div className="text-center mb-16 sm:mb-20">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
-              Visit Our Showroom
+              Ready to Find Your Perfect Rolex?
             </h2>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Schedule your appointment to see our premium Rolex collection in person.
+              Contact us today to schedule an appointment or request more information about our premium collections.
             </p>
           </div>
           
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="space-y-6">
-              {[
-                { icon: MapPin, text: "Veris Pipera Park" },
-                { icon: Phone, text: "+40 734 049 253" },
-                { icon: Mail, text: "office@dpwatches.ro" }
-              ].map((item, index) => (
-                <div 
-                  key={index} 
-                  className="animate-on-scroll flex items-start gap-4 p-6 bg-white/[0.02] border border-white/[0.05] rounded-2xl"
-                >
-                  <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center">
-                    <item.icon className="w-6 h-6 text-blue-400" />
+              <Card className="bg-white/[0.02] border-white/[0.05] backdrop-blur-sm">
+                <div className="p-6">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center">
+                      <Phone className="w-5 h-5 text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold">Phone</h3>
+                      <p className="text-muted-foreground">+40 734 049 253</p>
+                    </div>
                   </div>
-                  <p className="text-lg">{item.text}</p>
-                </div>
-              ))}
-              
-              <div className="animate-on-scroll p-6 bg-white/[0.02] border border-white/[0.05] rounded-2xl">
-                <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-                <div className="flex gap-3">
-                  <a 
-                    href="https://www.instagram.com/dpwatches.ro" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-white/[0.05] flex items-center justify-center hover:bg-blue-500/20 transition-colors"
+                  <Button 
+                    variant="outline" 
+                    className="w-full h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover"
                   >
-                    <Instagram className="w-5 h-5 text-white" />
-                  </a>
-                  <a 
-                    href="https://www.tiktok.com/@dragospetcuwatches" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-white/[0.05] flex items-center justify-center hover:bg-blue-500/20 transition-colors"
-                  >
-                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.52a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13a8.27 8.27 0 005.58 2.17V11.7a4.83 4.83 0 01-3.77-1.24V6.69h3.77z"/>
-                    </svg>
-                  </a>
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call Now
+                  </Button>
                 </div>
-              </div>
+              </Card>
               
-              <div className="animate-on-scroll flex gap-4">
-                <ShimmerButton className="flex-1 shadow-2xl btn-hover" background="rgba(59,130,246,1)">
-                  <span className="text-sm font-medium text-white">Book Appointment</span>
-                </ShimmerButton>
-                
-                <Button 
-                  variant="outline" 
-                  className="h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover"
-                >
-                  <MessageCircle className="w-4 h-4 mr-2" />
-                  WhatsApp
-                </Button>
-              </div>
+              <Card className="bg-white/[0.02] border-white/[0.05] backdrop-blur-sm">
+                <div className="p-6">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center">
+                      <Mail className="w-5 h-5 text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold">Email</h3>
+                      <p className="text-muted-foreground">office@dpwatches.ro</p>
+                    </div>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    className="w-full h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover"
+                  >
+                    <Mail className="w-4 h-4 mr-2" />
+                    Send Message
+                  </Button>
+                </div>
+              </Card>
+              
+              <Card className="bg-white/[0.02] border-white/[0.05] backdrop-blur-sm">
+                <div className="p-6">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/15 to-blue-600/5 border border-blue-500/10 flex items-center justify-center">
+                      <MapPin className="w-5 h-5 text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold">Address</h3>
+                      <p className="text-muted-foreground">Veris Pipera Park</p>
+                    </div>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    className="w-full h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover"
+                  >
+                    <MapPin className="w-4 h-4 mr-2" />
+                    Get Directions
+                  </Button>
+                </div>
+              </Card>
+              
+              <Button 
+                variant="outline" 
+                className="w-full h-12 px-6 rounded-full border-white/10 text-white hover:bg-white/5 btn-hover"
+              >
+                <Phone className="w-4 h-4 mr-2" />
+                WhatsApp
+              </Button>
             </div>
             
-            <div className="animate-on-scroll">
-              <div className="h-[350px] sm:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden">
-                <iframe
-                  src={"https://www.google.com/maps?q=" + encodeURIComponent("Veris Pipera Park") + "&output=embed"}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
+            <div className="h-[350px] sm:h-[400px] lg:h-[500px] rounded-2xl overflow-hidden">
+              <iframe 
+                src={"https://www.google.com/maps?q=" + encodeURIComponent("Veris Pipera Park") + "&output=embed"} 
+                width="100%" 
+                height="100%" 
+                style={{border:0}} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="DPWatches Location"
+              ></iframe>
             </div>
           </div>
         </div>
@@ -607,8 +615,8 @@ const App = () => {
       {/* Footer */}
       <footer className="relative pt-8 pb-32">
         <Separator className="mb-8" />
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8 flex flex-col md:flex-row items-center justify-between">
+          <p className="text-sm text-muted-foreground mb-4 md:mb-0">
             © {new Date().getFullYear()} DPWatches. All rights reserved.
           </p>
           <div className="flex gap-3">
@@ -616,19 +624,9 @@ const App = () => {
               href="https://www.instagram.com/dpwatches.ro" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-white/[0.05] flex items-center justify-center hover:bg-blue-500/20 transition-colors"
+              className="w-10 h-10 rounded-full bg-white/[0.05] flex items-center justify-center hover:bg-white/[0.1] transition-colors"
             >
               <Instagram className="w-5 h-5 text-white" />
-            </a>
-            <a 
-              href="https://www.tiktok.com/@dragospetcuwatches" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-white/[0.05] flex items-center justify-center hover:bg-blue-500/20 transition-colors"
-            >
-              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.52a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46V13a8.27 8.27 0 005.58 2.17V11.7a4.83 4.83 0 01-3.77-1.24V6.69h3.77z"/>
-              </svg>
             </a>
           </div>
         </div>
@@ -642,6 +640,4 @@ const App = () => {
       </div>
     </>
   );
-};
-
-export default App;
+}
